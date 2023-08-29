@@ -16,7 +16,7 @@ variables:
 
 steps:
   - script: |
-      git clone https://github.com/Guyashkenazi6/CarDealership.git
+      git clone https://github.com/Guyashkenazi6/cardealership.git
       cd GuyAshkenazi  # Change to the directory containing the Dockerfile
       docker build -t $(DOCKERHUB_USERNAME)/CarDealer:latest .
       echo $(DOCKERHUB_PASSWORD) | docker login -u $(DOCKERHUB_USERNAME) --password-stdin
