@@ -7,7 +7,7 @@ import requests
 # client = MongoClient("mongodb://localhost:27017")
 client = MongoClient("mongodb://172.17.0.1:27017")
 db_vehicles = client["vehiecls"]
-collection = db_vehicles["vehicels"]
+collection = db_vehicles["vehiecls"]
 
 app = FastAPI()
 
