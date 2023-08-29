@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
       - name: visa-app
-        image: your-dockerhub-username/vehicle_management_server-visa
+        image: guyashkenazi/vehicle_management_server-visa:latest
         ports:
         - containerPort: 9010
       - name: main-app
-        image: your-dockerhub-username/vehicle_management_server-main
+        image: guyashkenazi/vehicle_management_server-main:latest
         ports:
         - containerPort: 9000
