@@ -20,7 +20,7 @@ steps:
       cd cardealership/main  # Change to the directory containing the Dockerfile
       docker build -t $(DOCKERHUB_USERNAME)/vehicle_management_server-main .
       echo $(DOCKERHUB_PASSWORD) | docker login -u $(DOCKERHUB_USERNAME) --password-stdin
-      docker push $(DOCKERHUB_USERNAME)/cardealership
+      docker push $(DOCKERHUB_USERNAME)/vehicle_management_server-main
     displayName: 'Build and Push Docker Image'
 
   - script: |
@@ -34,7 +34,7 @@ steps:
       cd cardealership/visa  # Change to the directory containing the Dockerfile
       docker build -t $(DOCKERHUB_USERNAME)/vehicle_management_server-visa .
       echo $(DOCKERHUB_PASSWORD) | docker login -u $(DOCKERHUB_USERNAME) --password-stdin
-      docker push $(DOCKERHUB_USERNAME)cardealership
+      docker push $(DOCKERHUB_USERNAME)/vehicle_management_server-visa
     displayName: 'Build and Push Docker Image'
 
   - script: |
