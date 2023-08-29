@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import requests
 
-# MongoDB setup
+
 # client = MongoClient("mongodb://localhost:27017")
 client = MongoClient("mongodb://172.17.0.1:27017")
 db_vehicles = client["vehiecls"]
