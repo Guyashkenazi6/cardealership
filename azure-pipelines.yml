@@ -1,0 +1,31 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - main/main.py
+      - visa/visa.py
+pool:
+  name: my-ubuntu-pool  # Specify the name of your custom agent pool here
+
+# Define Docker Hub credentials as variables
+variables:
+  DOCKERHUB_USERNAME: 'guyashkenazi'
+  DOCKERHUB_PASSWORD: 'Masgat2021'
+
+steps:
+  - script: |
+      git clone https://github.com/Guyashkenazi6/CarDealership.git
+      cd GuyAshkenazi  # Change to the directory containing the Dockerfile
+      docker build -t $(DOCKERHUB_USERNAME)/CarDealer:latest .
+      echo $(DOCKERHUB_PASSWORD) | docker login -u $(DOCKERHUB_USERNAME) --password-stdin
+      docker push $(DOCKERHUB_USERNAME)/CarDeale:latest
+    displayName: 'Build and Push Docker Image'
+
+  - script: |
+      echo "Running the Docker container..."
+      docker run -d -p 9000:9000 $(DOCKERHUB_USERNAME)/CarDeale:latest
+    displayName: 'Run Docker Container'
+
+
