@@ -20,7 +20,11 @@ app = FastAPI()
 # MongoDB setup
 # client = MongoClient("mongodb://localhost:27017")
 # client = MongoClient("mongodb://172.17.0.1:27017")
-client = MongoClient("mongodb://mongodb:27017")
+external_service_name = 'mongodb'
+port = 27017
+
+# Connect to MongoDB using the external service's DNS name
+client = MongoClient(host=external_service_name, port=port)
 db = client["visa"]
 received_data_collection = db["visa"]  # Use the existing "visa" collection
 success_visa_collection = db["success"]
