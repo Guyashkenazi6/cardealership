@@ -18,14 +18,14 @@ steps:
   - script: |
       git clone https://github.com/Guyashkenazi6/cardealership.git
       cd GuyAshkenazi  # Change to the directory containing the Dockerfile
-      docker build -t $(DOCKERHUB_USERNAME)/CarDealer:latest .
+      docker build -t $(DOCKERHUB_USERNAME)/cardealer:latest .
       echo $(DOCKERHUB_PASSWORD) | docker login -u $(DOCKERHUB_USERNAME) --password-stdin
-      docker push $(DOCKERHUB_USERNAME)/CarDeale:latest
+      docker push $(DOCKERHUB_USERNAME)/cardeale:latest
     displayName: 'Build and Push Docker Image'
 
   - script: |
       echo "Running the Docker container..."
-      docker run -d -p 9000:9000 $(DOCKERHUB_USERNAME)/CarDeale:latest
+      docker run -d -p 9000:9000 $(DOCKERHUB_USERNAME)/cardeale:latest
     displayName: 'Run Docker Container'
 
 
