@@ -18,27 +18,27 @@ steps:
   - script: |
       git clone https://github.com/Guyashkenazi6/cardealership.git
       cd cardealership/main  # Change to the directory containing the Dockerfile
-      docker build -t $(DOCKERHUB_USERNAME)guyashkenazi/vehicle_management_server-main .
+      docker build -t $(DOCKERHUB_USERNAME)/vehicle_management_server-main .
       echo $(DOCKERHUB_PASSWORD) | docker login -u $(DOCKERHUB_USERNAME) --password-stdin
-      docker push $(DOCKERHUB_USERNAME)guyashkenazi/vehicle_management_server-main:latest
+      docker push $(DOCKERHUB_USERNAME)/cardealership
     displayName: 'Build and Push Docker Image'
 
   - script: |
       echo "Running the Docker container..."
-      docker run -d -p 9000:9000 $(DOCKERHUB_USERNAME)guyashkenazi/vehicle_management_server-main:latest
+      docker run -d -p 9000:9000 $(DOCKERHUB_USERNAME)/vehicle_management_server-main:latest
     displayName: 'Run Docker Container'
 
 
   - script: |
       git clone https://github.com/Guyashkenazi6/cardealership.git
       cd cardealership/visa  # Change to the directory containing the Dockerfile
-      docker build -t $(DOCKERHUB_USERNAME)guyashkenazi/vehicle_management_server-visa .
+      docker build -t $(DOCKERHUB_USERNAME)/vehicle_management_server-visa .
       echo $(DOCKERHUB_PASSWORD) | docker login -u $(DOCKERHUB_USERNAME) --password-stdin
-      docker push $(DOCKERHUB_USERNAME)guyashkenazi/vehicle_management_server-visa
+      docker push $(DOCKERHUB_USERNAME)cardealership
     displayName: 'Build and Push Docker Image'
 
   - script: |
       echo "Running the Docker container..."
-      docker run -d -p 9010:9010 $(DOCKERHUB_USERNAME)guyashkenazi/vehicle_management_server-visa
+      docker run -d -p 9010:9010 $(DOCKERHUB_USERNAME)/vehicle_management_server-visa
     displayName: 'Run Docker Container'
 
