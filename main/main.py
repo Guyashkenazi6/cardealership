@@ -6,11 +6,7 @@ import requests
 
 # client = MongoClient("mongodb://localhost:27017")
 # client = MongoClient("mongodb://172.17.0.1:27017")
-external_service_name = 'mongodb'
-port = 27017
-
-# Connect to MongoDB using the external service's DNS name
-client = MongoClient(host=external_service_name, port=port)
+client = MongoClient("mongodb://mongodb:27017")
 db_vehicles = client["vehiecls"]
 collection = db_vehicles["vehiecls"]
 
@@ -88,7 +84,7 @@ async def delete_vehicle(vehicle_id: int):
         return {"message": "Vehicle not found"}
 
 
-url_visa = "http://34.76.213.156:9010/receive"  
+url_visa = "http://localhost:9010/receive"  
 
 @app.post("/order", tags=["order"])
 async def buy_car(customer: str, card_number: str, vehicle_id: int):
