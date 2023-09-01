@@ -20,7 +20,7 @@ app = FastAPI()
 # MongoDB setup
 # client = MongoClient("mongodb://localhost:27017")
 # client = MongoClient("mongodb://172.17.0.1:27017")
-client = MongoClient("mongodb:27017")
+client = MongoClient("mongodb://mongodb")
 db = client["visa"]
 received_data_collection = db["visa"]  # Use the existing "visa" collection
 success_visa_collection = db["success"]
