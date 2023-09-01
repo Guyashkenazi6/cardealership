@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: mongodb
-subnets:
+subsets:
   - addresses: 
       - ip: 10.48.4.29
     ports:
