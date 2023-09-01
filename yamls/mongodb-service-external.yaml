@@ -2,9 +2,6 @@ kind: Endpoints
 apiVersion: v1
 metadata:
   name: mongodb
-spec:
-  selector:
-    app: mongodb
 subsets:
   - addresses: 
       - ip: 10.48.4.29
