@@ -6,7 +6,6 @@ import uvicorn
 import random
 # from pydantic import BaseModel
 # import string
-
 # class Visa(BaseModel):
 #     customer : str
 #     card_number : str
