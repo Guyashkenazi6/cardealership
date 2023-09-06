@@ -38,7 +38,6 @@ async def get_vehicle_by_id(vehicle_id: int):
     
     return {"message": "Vehicle not found"}
 
-
 # "vehicle_id": collection.count_documents({}) + 1,  # Assign a new vehicle_id
 
 @app.post("/vehicles", tags=["vehicles"])
