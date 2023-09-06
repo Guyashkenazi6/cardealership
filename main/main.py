@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import requests
-
+import os
+# os.getenv("URL_PREFIX")
 # client = MongoClient("mongodb://localhost:27017")
 # client = MongoClient("mongodb://172.17.0.1:27017")
 client = MongoClient("mongodb://mongodb")
@@ -15,6 +16,7 @@ app = FastAPI()
 async def home():
     return "Hello, this is the Vehicle Management API!"
 
+# @app.get(f"{os.getenv("URL_PREFIX")}/vehicles", tags=["vehicles"])
 @app.get("/vehicles", tags=["vehicles"])
 async def get_all_vehicles():
     vehicle_data = []
