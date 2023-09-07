@@ -11,7 +11,7 @@ import random
 #     card_number : str
 #     amount : str
 
-app = FastAPI()
+app = FastAPI(docs_url="/visa", openapi_url="/openapi.json")
 
 # def generate_transaction_id():
 #     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
