@@ -10,9 +10,9 @@ client = MongoClient("mongodb://mongodb")
 db_vehicles = client["vehiecls"]
 collection = db_vehicles["vehiecls"]
 
-app = FastAPI()
+app = FastAPI(docs_url="/cars")
 
-@app.get("/cars")
+@app.get("/")
 async def home():
     return "Hello, this is the Vehicle Management API!"
 
