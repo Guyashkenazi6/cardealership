@@ -151,7 +151,7 @@ async def home():
     return "hello" 
 
 
-@app.get("/Good",tags = ["Good"])
+@app.get("/visa",tags = ["Good"])
 async def get_all_good():
     my_good_json = list(success_visa_collection.find({}))
     for data in my_good_json:
