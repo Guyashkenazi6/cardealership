@@ -6,6 +6,10 @@ spec:
   selector:
     app: main-visa
   ports:
-  - port: 9000
+  - name: main-port
+    port: 9000
     targetPort: 9000
+  - name: visa-port
+    port: 9010
+    targetPort: 9010
   type: LoadBalancer
