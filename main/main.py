@@ -3,6 +3,9 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import requests
 import os
+# from fastapi.middleware.cors import CORSMiddleware
+# from api.routers import skipper, boston, mobilenet
+
 # os.getenv("URL_PREFIX")
 # client = MongoClient("mongodb://localhost:27017")
 # client = MongoClient("mongodb://172.17.0.1:27017")
@@ -10,7 +13,18 @@ client = MongoClient("mongodb://mongodb")
 db_vehicles = client["vehiecls"]
 collection = db_vehicles["vehiecls"]
 
-app = FastAPI(docs_url="/cars", openapi_url="/openapi.json")
+app = FastAPI(docs_url="/cars", openapi_url="/cars/openapi.json")
+
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+#     allow_credentials=True,
+# )
+
+
+# app.include_router(router_tasks, prefix="/cars")
 
 @app.get("/")
 async def home():
