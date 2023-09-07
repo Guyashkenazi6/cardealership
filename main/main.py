@@ -13,18 +13,16 @@ client = MongoClient("mongodb://mongodb")
 db_vehicles = client["vehiecls"]
 collection = db_vehicles["vehiecls"]
 
-app = FastAPI(docs_url="/cars", openapi_url="/cars/openapi.json")
+app = FastAPI(docs_url="/cars")
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-#     allow_credentials=True,
-# )
-
-
-# app.include_router(router_tasks, prefix="/cars")
+@app.get("/cars", include_in_schema=False)
+async def custom_swagger_ui_html(req):
+    root_path = req.scope.get("root_path", "").rstrip("/")
+    openapi_url = root_path + app.openapi_url
+    return get_swagger_ui_html(
+        openapi_url=openapi_url,
+        title="API",
+    )
 
 @app.get("/")
 async def home():
