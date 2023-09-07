@@ -12,13 +12,13 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: main-visa
+            name: main
             port:
               number: 9000
       - path: /visa
         pathType: Prefix
         backend:
           service:
-            name: main-visa
+            name: visa
             port:
               number: 9010

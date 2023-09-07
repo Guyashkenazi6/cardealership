@@ -1,14 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: main-visa
+  name: main
 spec:
   selector:
-    app: main-visa
+    app: main
   ports:
   - name: main-port
     port: 9000
     targetPort: 9000
-  - name: visa-port
-    port: 9010
-    targetPort: 9010
