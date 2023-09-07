@@ -12,4 +12,3 @@ spec:
   - name: visa-port
     port: 9010
     targetPort: 9010
-  type: LoadBalancer
