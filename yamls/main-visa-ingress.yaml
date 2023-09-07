@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: main-visa-ingress
+  annotations:
+    # Depending on the Ingress controller, you might need specific annotations.
+    # For nginx for example:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /cars
+        pathType: Prefix
+        backend:
+          service:
+            name: main-visa
+            port:
+              number: 9000
+      - path: /visa
+        pathType: Prefix
+        backend:
+          service:
+            name: main-visa
+            port:
+              number: 9010
