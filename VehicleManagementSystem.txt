@@ -1,0 +1,108 @@
+# Vehicle Management System
+
+## Overview
+The Vehicle Management System is a microservices-based project built using FastAPI and MongoDB. It provides a REST API for managing vehicle inventory and allows users to purchase vehicles through an integrated payment service. The system is containerized using Docker and orchestrated with Kubernetes for scalability and deployment.
+
+## Technologies Used
+- **FastAPI** - A modern web framework for building APIs with Python.
+- **MongoDB** - NoSQL database for storing vehicle and transaction data.
+- **Docker** - Used for containerizing the services.
+- **Kubernetes** - Deployment and orchestration of microservices.
+- **Uvicorn** - ASGI server for running FastAPI applications.
+- **Pymongo** - Python client for MongoDB.
+- **Requests** - For HTTP requests between services.
+
+## Architecture
+The system consists of three main components:
+1. **Vehicle Management Service (`main`)**
+   - Provides CRUD operations for vehicles.
+   - Connects to MongoDB to store vehicle data.
+   - Handles purchase requests and sends payment transactions to the Visa service.
+
+2. **Payment Service (`visa`)**
+   - Handles payment transactions.
+   - Randomly determines transaction success or failure.
+   - Stores successful and failed transactions in MongoDB.
+
+3. **MongoDB Database**
+   - Stores vehicle inventory and transaction details.
+
+## System Workflow
+1. A user can fetch available vehicles using `GET /vehicles`.
+2. A new vehicle can be added with `POST /vehicles`.
+3. A user can purchase a vehicle by sending a request to `POST /order`.
+4. The Vehicle Service sends the payment request to the Visa Service (`POST /receive`).
+5. The Visa Service processes the payment (with an 80% success rate) and stores the result in MongoDB.
+
+## Deployment with Docker & Kubernetes
+Each service has its own Docker container and is deployed on Kubernetes with the following components:
+
+### Deployments:
+- **`main-deployment.yaml`**: Deploys the vehicle service with two replicas.
+- **`visa-deployment.yaml`**: Deploys the visa payment service with two replicas.
+- **`mongodb-deployment.yaml`**: Deploys a single MongoDB instance.
+
+### Services:
+- **`main-service.yaml`**: Exposes the vehicle service on port `9000`.
+- **`visa-service.yaml`**: Exposes the visa service on port `9010`.
+- **`mongodb-service.yaml`**: Provides internal access to MongoDB.
+
+## Running the Project
+### Using Docker
+```bash
+# Build and run the main service
+cd main
+docker build -t vehicle_management_main .
+docker run -p 9000:9000 vehicle_management_main
+
+# Build and run the visa service
+cd ../visa
+docker build -t vehicle_management_visa .
+docker run -p 9010:9010 vehicle_management_visa
+```
+
+### Using Kubernetes
+```bash
+# Deploy MongoDB
+kubectl apply -f yamls/mongodb-deployment.yaml
+kubectl apply -f yamls/mongodb-service.yaml
+
+# Deploy Main Service
+kubectl apply -f yamls/main-deployment.yaml
+kubectl apply -f yamls/main-service.yaml
+
+# Deploy Visa Service
+kubectl apply -f yamls/visa-deployment.yaml
+kubectl apply -f yamls/visa-service.yaml
+```
+
+## API Endpoints
+### Vehicle Management Service (`main`)
+| Method | Endpoint                | Description                   |
+|--------|-------------------------|-------------------------------|
+| GET    | `/vehicles`             | Get all vehicles             |
+| GET    | `/vehicles/{id}`        | Get a specific vehicle       |
+| POST   | `/vehicles`             | Add a new vehicle            |
+| PUT    | `/vehicles/{id}`        | Update vehicle details       |
+| DELETE | `/vehicles/{id}`        | Delete a vehicle             |
+| POST   | `/order`                | Purchase a vehicle           |
+
+### Payment Service (`visa`)
+| Method | Endpoint    | Description                 |
+|--------|------------|-----------------------------|
+| POST   | `/receive` | Process a payment request  |
+| GET    | `/Good`    | Get successful transactions |
+| GET    | `/Bad`     | Get failed transactions     |
+
+## Future Improvements
+- Implement a frontend UI for better user interaction.
+- Add authentication and authorization using JWT.
+- Improve error handling and logging.
+- Deploy a more robust database cluster for scalability.
+
+## Conclusion
+This project demonstrates the development of a microservices-based application using FastAPI, Docker, and Kubernetes. It provides a scalable and efficient way to manage vehicles and process payments securely.
+
+---
+🚀 **This project showcases skills in Python, API development, microservices, and cloud deployment – making it a great addition to your portfolio for job interviews!**
+
